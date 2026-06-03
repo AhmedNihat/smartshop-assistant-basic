@@ -34,18 +34,20 @@ docs = [
     Document(page_content=documents[4], metadata={"topic": "payment"}),
 ]
 
-client = chromadb.EphemeralClient()
+client = chromadb.PersistentClient(path="./chroma_db")
 
 vector_store = Chroma.from_documents(
     documents=docs,
     embedding=embeddings,
     collection_name="smartshop",
-    client=client
+    client=client,
+    persist_directory="./my_chroma_db"
 )
 
 
 retriever = vector_store.as_retriever(
-    search_kwargs={"k": 3}
+    search_type="similarity_score_threshold",
+    search_kwargs={"k": 2, "score_threshold": 0.5}
 )
 
 prompt = PromptTemplate(
@@ -79,6 +81,8 @@ while True:
     question = input("Your question (or 'exit' to quit): ")
     if question.lower() == "exit":
         break
-    response = chain.invoke(question)
-    print(response.content)
-
+    try:
+        response = chain.invoke(question)
+        print(response.content)
+    except Exception as e:
+        print("Something went wrong. Please try again.")
