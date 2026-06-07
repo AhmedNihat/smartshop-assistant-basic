@@ -38,7 +38,7 @@ client = chromadb.PersistentClient(path="./chroma_db")
 
 vector_store = Chroma.from_documents(
     documents=docs,
-    embedding=embeddings,
+    embedding=embeddings,                                                                                                                                                                       
     collection_name="smartshop",
     client=client,
     persist_directory="./my_chroma_db"
@@ -86,3 +86,5 @@ while True:
         print(response.content)
     except Exception as e:
         print("Something went wrong. Please try again.")
+
+
