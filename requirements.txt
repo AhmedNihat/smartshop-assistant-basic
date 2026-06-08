@@ -9,3 +9,5 @@ sentence-transformers
 python-dotenv
 groq
 pypdf
+fastapi
+uvicorn
