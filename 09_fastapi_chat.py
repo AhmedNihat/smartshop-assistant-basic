@@ -1,7 +1,7 @@
 
 import os
 import chromadb
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from langchain_chroma import Chroma
@@ -70,5 +70,8 @@ class ChatResponse(BaseModel):
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest) -> ChatResponse:
-    answer = await chain.ainvoke(request.question)
-    return ChatResponse(answer=answer.content)
+    try:
+        answer = await chain.ainvoke(request.question)
+        return ChatResponse(answer=answer.content)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"LLM service unavailable: {str(e)}")
