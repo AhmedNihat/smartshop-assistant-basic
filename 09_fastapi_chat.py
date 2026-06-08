@@ -2,6 +2,7 @@
 import os
 import chromadb
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from langchain_chroma import Chroma
@@ -13,7 +14,6 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 load_dotenv()
-
 
 loader = PyPDFLoader("smartshop_policy.pdf")
 pages = loader.load()
@@ -60,7 +60,16 @@ chain = (
     {"context": retriever | format_docs, "question": RunnablePassthrough()} | prompt | llm
 )
 
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class ChatRequest(BaseModel):
     question: str
