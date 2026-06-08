@@ -69,6 +69,6 @@ class ChatResponse(BaseModel):
     answer: str
 
 @app.post("/chat", response_model=ChatResponse)
-def chat(request: ChatRequest) -> ChatResponse:
-    answer = chain.invoke(request.question)
+async def chat(request: ChatRequest) -> ChatResponse:
+    answer = await chain.ainvoke(request.question)
     return ChatResponse(answer=answer.content)
