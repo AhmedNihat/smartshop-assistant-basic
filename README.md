@@ -54,48 +54,9 @@ The system ingests business documents, encodes them into semantic vectors, store
 
 ## ◈ System Architecture
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        USER QUERY                               │
-└────────────────────────────┬────────────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  INGESTION LAYER                                                │
-│  ┌──────────────┐    ┌───────────────┐    ┌──────────────────┐  │
-│  │  PDF Loader  │───▶│ Text Chunker  │───▶│  HuggingFace     │  │
-│  │  (PyMuPDF)   │    │ (LangChain)   │    │  Embeddings      │  │
-│  └──────────────┘    └───────────────┘    └────────┬─────────┘  │
-└────────────────────────────────────────────────────┼────────────┘
-                                                     │
-                                                     ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  RETRIEVAL LAYER                                                │
-│                  ┌─────────────────────┐                        │
-│                  │   ChromaDB           │                        │
-│                  │   Vector Store       │                        │
-│                  │   (Persistent)       │                        │
-│                  └──────────┬──────────┘                        │
-│                             │ Semantic Retrieval (Top-K)         │
-└─────────────────────────────┼───────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  GENERATION LAYER                                               │
-│  ┌────────────────────┐         ┌────────────────────────────┐  │
-│  │  LangChain LCEL    │────────▶│   Groq API                 │  │
-│  │  Chain             │         │   LLaMA 3.1 (70B)          │  │
-│  └────────────────────┘         └────────────────────────────┘  │
-└────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-                  ┌───────────────────────┐
-                  │   Grounded Answer     │
-                  │   → User / API / UI   │
-                  └───────────────────────┘
-```
-
----
+<div align="center">
+  <img src="docs/screenshots/diagram.png" alt="System Architecture" width="500">
+</div>
 
 ## ◈ Tech Stack
 
@@ -293,16 +254,21 @@ curl -X POST "https://smartshop-assistant-basic-production.up.railway.app/chat" 
 <div align="center">
 
 ### 1. Frontend Chatbot UI
-![Frontend Chatbot](docs/screenshots/frontend.png)
 
-### 2. Swagger UI - API Documentation
-![Swagger UI](docs/screenshots/swagger.png)
+<img src="docs/screenshots/frontend.png"
+     alt="Frontend Chatbot UI"
+     width="750"/>
 
+<br><br>
+
+### 2. Swagger API Documentation
+
+<img src="docs/screenshots/swagger.png"
+     alt="Swagger UI"
+     width="750"/>
 
 </div>
 
-**🌐 Live Demo:** [smartshopchat.netlify.app](https://smartshopchat.netlify.app)  
-**🔌 API Docs:** [Railway Swagger](https://smartshop-assistant-basic-production.up.railway.app/docs)
 
 **🌐 Live:** [smartshopchat.netlify.app](https://smartshopchat.netlify.app) &nbsp;|&nbsp; **🔌 API:** [Railway Deployment](https://smartshop-assistant-basic-production.up.railway.app/docs)
 
@@ -358,18 +324,25 @@ git push origin feature/your-feature-name
 
 <div align="center">
 
-```
-╔══════════════════════════════════════════════════════╗
-║             AHMED ULLAH NIHAT                        ║
-║    CSE Graduate · Premier University, Chittagong     ║
-║         Aspiring ML / AI Engineer                    ║
-╚══════════════════════════════════════════════════════╝
-```
+<h2>Ahmed Ullah Nihat</h2>
 
-[![GitHub](https://img.shields.io/badge/GitHub-AhmedNihat-181717?style=for-the-badge&logo=github)](https://github.com/AhmedNihat)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-ahmed--ullah--ds-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/ahmed-ullah-ds)
-[![Email](https://img.shields.io/badge/Email-ahmedullahnihat@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ahmedullahnihat@gmail.com)
-[![Portfolio](https://img.shields.io/badge/Portfolio-ahmednihat.xyz-FFD700?style=for-the-badge&logo=netlify&logoColor=black)](https://ahmednihat.xyz)
+<p>
+Data Analyst • AI / ML Engineer • NLP Enthusiast 
+</p>
+
+<br/>
+
+<a href="https://github.com/AhmedNihat">
+  <img src="https://img.shields.io/badge/GitHub-AhmedNihat-181717?style=for-the-badge&logo=github"/>
+</a>
+
+<a href="https://linkedin.com/in/ahmed-ullah-ds">
+  <img src="https://img.shields.io/badge/LinkedIn-ahmed--ullah--ds-0A66C2?style=for-the-badge&logo=linkedin"/>
+</a>
+
+<a href="mailto:ahmedullahnihat@gmail.com">
+  <img src="https://img.shields.io/badge/Email-Contact-EA4335?style=for-the-badge&logo=gmail"/>
+</a>
 
 </div>
 
@@ -403,6 +376,15 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 
 *Built with precision. Deployed with purpose.*
 
-**SmartShop Assistant** · MIT License · [ahmednihat.xyz](https://ahmednihat.xyz)
+# **SmartShop Assistant**
+
+MIT License · [ahmednihat.xyz](https://ahmednihat.xyz)
+
+---
+
+⭐ If you found this project useful, consider giving it a star.
+
+© 2025 Ahmed Ullah Nihat
 
 </div>
+
